@@ -1,0 +1,6 @@
+.itemCardArea {
+  margin-top: 30px;
+  & .ant-row {
+    width: 100%;
+  }
+}

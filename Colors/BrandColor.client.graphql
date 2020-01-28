@@ -1,0 +1,72 @@
+extend type Mutation {
+  setDefaultColorMode(defaultColorMode: ColorMode!): Boolean
+  addOrUpdateBrandColor(
+    color: PickerColor!
+    id: String
+    selectedColorMode: ColorMode!
+  ): Boolean
+  updateColorMode(id: String!, type: String!): Boolean
+}
+
+enum ColorMode {
+  HEX
+  RGB
+  HSB
+  LAB
+  CMYK
+}
+
+type PickerColor {
+  hex: String!
+  hsl: HslPickerValue
+  hsv: HsvPickerValue
+  oldHue: Float
+  rgb: RgbPickerValue
+  source: String
+}
+
+type HslPickerValue {
+  a: Float!
+  h: Float!
+  l: Float!
+  s: Float!
+}
+
+type HsvPickerValue {
+  a: Float!
+  h: Float!
+  s: Float!
+  v: Float!
+}
+
+type RgbPickerValue {
+  a: Float!
+  b: Float!
+  g: Float!
+  r: Float!
+}
+
+mutation SetDefaultColorMode($defaultColorMode: ColorMode!) {
+  setDefaultColorMode(defaultColorMode: $defaultColorMode) @client
+}
+
+mutation AddOrUpdateBrandColor(
+  $color: PickerValue!
+  $id: String
+  $selectedColorMode: ColorMode!
+) {
+  addOrUpdateBrandColor(
+    color: $color
+    id: $id
+    selectedColorMode: $selectedColorMode
+  ) @client
+}
+
+mutation UpdateColorMode($id: String!, $selectedColorMode: ColorMode!) {
+  updateColorMode(id: $id, selectedColorMode: $selectedColorMode) @client {
+    colors {
+      id
+      selectedColorMode
+    }
+  }
+}

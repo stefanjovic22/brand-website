@@ -1,0 +1,13 @@
+extend type Mutation {
+  setSelectedTemplate(id: Int!): Boolean
+}
+
+type Template {
+  id: Int!
+  name: String!
+  isAvailable: Boolean!
+}
+
+mutation SetSelectedTemplate($id: Int!) {
+  setSelectedTemplate(id: $id) @client
+}

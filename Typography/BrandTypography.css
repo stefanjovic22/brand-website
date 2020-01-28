@@ -1,0 +1,117 @@
+.typographyEditor {
+  color: var(--dark-grey-6);
+  & .typographyEditorArea {
+    padding: 24px 40px 30px 40px;
+    background-color: var(--onebrand-blue-grey-light);
+    font-size: var(--font-size-sm);
+    border-bottom: 1px solid var(--onebrand-blue-grey-light-2);
+    & .content {
+      font-size: var(--font-size-md);
+      line-height: 24px;
+      margin-bottom: 26px;
+    }
+    & .searchAndUploadArea {
+      display: flex;
+      align-items: flex-end;
+      width: 50%;
+      & .searchArea {
+        flex: 7;
+        & .searchTitle {
+          margin-bottom: 10px;
+        }
+        & .searchFields {
+          display: flex;
+          & > * {
+            margin-right: 1.25rem;
+            &:last-child {
+              margin-right: 0;
+            }
+          }
+          & .searchInput {
+            height: 2.5rem;
+          }
+          & .searchButton {
+            height: 2.5rem;
+            padding: 0 30px;
+          }
+        }
+      }
+    }
+    & .betweenTitleArea {
+      flex: 1;
+      text-align: center;
+      & .betweenTitle {
+        margin-bottom: 10px;
+      }
+    }
+    & .uploadArea {
+      flex: 2;
+      & .uploadTitle {
+        margin-bottom: 10px;
+      }
+      & .typographyUploadButton {
+        background-color: transparent;
+        border: 1px solid var(--medium-grey);
+        color: var(--darker-grey-6);
+        &:hover {
+          border: 1px solid var(--medium-grey);
+          color: var(--darker-grey-6);
+        }
+        &:focus {
+          border: 1px solid var(--medium-grey);
+          color: var(--darker-grey-6);
+        }
+      }
+    }
+  }
+  & .fontPreviewsArea {
+    min-height: 40vh;
+    display: flex;
+    justify-content: center;
+    & .fontlistName {
+      align-items: center;
+      display: flex;
+
+      opacity: 0.4;
+      font-size: 25px;
+    }
+  }
+  & .uploadedFontListArea {
+    box-shadow: inset 0 -14px 14px -14px var(--onebrand-blue-grey-light-2);
+    height: 40vh;
+    overflow: scroll;
+    padding-left: 40px;
+    padding-right: 40px;
+    & .fontlistItem {
+      & .fontName {
+        font-size: var(--font-size-sm);
+        padding: 30px 0px 5px 0px;
+      }
+      & .fontListControl {
+        widows: var(--width-full);
+        border-bottom: 1px solid var(--onebrand-blue-grey-light-2);
+        padding-bottom: 10px;
+        justify-content: space-between;
+        display: flex;
+        & .fontdescription {
+          font-size: var(--font-size-md);
+        }
+        & .deleteButton {
+          border: none;
+          cursor: pointer;
+          font-size: var(--font-size-lg);
+          line-height: 0.5;
+          opacity: 0.4;
+          padding: 0;
+          &:hover {
+            opacity: 1;
+          }
+        }
+      }
+    }
+  }
+  & .fontAddDoneButton {
+    padding: 1.875rem;
+    text-align: right;
+  }
+}

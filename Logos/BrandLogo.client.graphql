@@ -1,0 +1,134 @@
+extend type Mutation {
+  setLogoSpacingMultiple(spacingMultiple: Int!): Boolean
+  toggleLogoSpacingControls: Boolean
+  toggleLogoSpacingWidthControls: Boolean
+  toggleLogoSpacingAxisLink(axis: Axis!): Boolean
+  setLogoGuideOffset(side: Side!, offset: Int!): Boolean
+  setLogoSpacing(logoId: String!, spacing: LogoSpacing!): Boolean
+  LoadLogoIntoEditor(
+    logoId: String!
+    logoDisplaySize: LogoDisplaySize
+  ): LogoEditor
+  clearEditorValues: LogoEditor
+}
+
+type Logo {
+  id: ID!
+  originalUrl: String!
+  encodedUrl: String
+  encodedSize: LogoSize
+  spacing: LogoSpacing
+  title: String!
+  tags: [String!]
+}
+
+type LogoSize {
+  width: Float!
+  height: Float!
+}
+
+type LogoSpacing {
+  isEditedByUser: Boolean!
+  topPercentage: Float!
+  bottomPercentage: Float!
+  leftPercentage: Float!
+  rightPercentage: Float!
+  spacingMultiple: Float!
+}
+
+type LogoEditor {
+  id: ID!
+  logoDisplaySize: LogoDisplaySize
+  controlsEnabled: Boolean!
+  widthControlsEnabled: Boolean!
+  spacingMultiple: Float!
+  guideOffset: LogoGuideOffset!
+  axisLinked: LogoAxisLinkStatus!
+}
+
+type LogoDisplaySize {
+  containerWidth: Float!
+  containerHeight: Float!
+  logoWidth: Float!
+  logoHeight: Float!
+}
+
+type LogoGuideOffset {
+  top: Int
+  bottom: Int
+  left: Int
+  right: Int
+}
+
+type LogoAxisLinkStatus {
+  y: Boolean!
+  x: Boolean!
+}
+
+enum Side {
+  TOP
+  BOTTOM
+  LEFT
+  RIGHT
+}
+
+enum Axis {
+  Y
+  X
+}
+
+mutation SetLogoSpacingMultiple($spacingMultiple: Int!) {
+  setLogoSpacingMultiple(spacingMultiple: $spacingMultiple) @client
+}
+
+mutation ToggleLogoSpacingControls {
+  toggleLogoSpacingControls @client
+}
+
+mutation ToggleLogoSpacingWidthControls {
+  toggleLogoSpacingWidthControls @client
+}
+
+mutation ToggleLogoSpacingAxisLink($axis: Axis!) {
+  toggleLogoSpacingAxisLink(axis: $axis) @client
+}
+
+mutation SetLogoGuideOffset($side: Side!, $offset: Int!) {
+  setLogoGuideOffset(side: $side, offset: $offset) @client
+}
+
+mutation SetLogoSpacing($logoId: String!, $spacing: LogoSpacing!) {
+  setLogoSpacing(logoId: $logoId, spacing: $spacing) @client
+}
+
+mutation LoadLogoIntoEditor(
+  $logoId: String!
+  $logoDisplaySize: LogoDisplaySize!
+) {
+  loadLogoIntoEditor(logoId: $logoId, logoDisplaySize: $logoDisplaySize)
+    @client {
+    controlsEnabled
+    widthControlsEnabled
+    logoDisplaySize {
+      containerWidth
+      containerHeight
+      logoWidth
+      logoHeight
+    }
+    spacingMultiple
+    guideOffset {
+      top
+      bottom
+      left
+      right
+    }
+    axisLinked {
+      y
+      x
+    }
+  }
+}
+
+mutation ClearEditorValues {
+  clearEditorValues @client
+}

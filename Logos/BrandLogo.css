@@ -1,0 +1,117 @@
+.logoUploadAndDisplay {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  /* Remove height and max-height if we don't want the logo
+  upload/display box changing size based on control visibility. */
+  height: 100%;
+  min-height: 80vh;
+  padding: 1.375rem 2.5rem 2rem;
+}
+
+.vectorUploadInstructions {
+  font-size: var(--font-size-base);
+  & p {
+    margin-bottom: 1.6785rem;
+  }
+  & .ant-checkbox-wrapper {
+    margin-bottom: 1.875rem;
+  }
+}
+
+.logoUploaderContainer {
+  background: none;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  & > .ant-upload.ant-upload-drag {
+    background: none;
+    border: 0;
+    border-radius: 8px;
+    box-shadow: 5px 5px 25px 0 rgba(179, 179, 179, 0.25);
+    cursor: default;
+    /* Remove if we don't want the logo upload/display box changing
+    size based on control visibility. */
+    height: 100%;
+    padding: 20px;
+    &:hover {
+      border: 0;
+    }
+    &.ant-upload-drag-hover {
+      border: 0;
+      & .logoUploaderCardOutline {
+        border-color: var(--onebrand-purple-2);
+      }
+    }
+    & > .ant-upload.ant-upload-btn {
+      cursor: grab;
+      display: initial;
+      height: initial;
+      & > .ant-upload-drag-container {
+        display: initial;
+      }
+    }
+    & .logoUploaderCardOutline {
+      border: 2px dashed #bbbbbb;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+      transition: border-color 0.3s ease-in;
+      &.active {
+        border-color: transparent;
+      }
+      & .logoUploaderContent {
+        padding: 100px;
+      }
+      & > .uploadInstructions {
+        margin-bottom: 6.25rem;
+      }
+      & .logoUploaderCardTitle {
+        font-size: var(--font-size-md);
+      }
+      & .logoUploaderCardDescription {
+        opacity: 0.5;
+      }
+      & .uploadError {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 0 26%;
+        width: 100%;
+        & .ant-alert-error.ant-alert-with-description {
+          margin-bottom: 1rem;
+          padding: 1.5rem 3.5rem;
+        }
+        & .onebrand-button {
+          max-width: 11rem;
+        }
+      }
+    }
+    & .logoUploaderTypeDescription {
+      font-size: var(--font-size-md);
+      opacity: 0.5;
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.logoEditorAdditionalOptions {
+  margin-top: 2.5rem;
+  width: 100%;
+}
+
+.logoUploadButton {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  & .onebrand-button {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 1.5625rem 2.5rem 1.875rem;
+  }
+}

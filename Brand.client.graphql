@@ -1,0 +1,160 @@
+type Brand {
+  id: ID!
+  defaultColorMode: ColorMode
+  colors: [Color]
+  logos: [Logo]
+  fonts: [Font]
+  selectedTemplate: GuidelineTemplate
+  statuses: BrandStatus!
+  isComplete: Boolean!
+}
+
+type BrandStatus {
+  colors: Status!
+  logos: Status!
+  fonts: Status!
+  template: Status!
+}
+
+enum Status {
+  WAITING
+  PROCESS
+  FINISHED
+}
+
+enum ColorMode {
+  HEX
+  RGB
+  HSB
+  LAB
+  CMYK
+}
+
+type Color {
+  id: ID!
+  hexValue: String!
+  rgbValue: RgbValue!
+  hsbValue: HsbValue!
+  labValue: LabValue!
+  cmykValue: CmykValue!
+  selectedColorMode: ColorMode!
+  title: String!
+  tags: [String!]
+}
+
+type RgbValue {
+  red: Float!
+  green: Float!
+  blue: Float!
+}
+
+type HsbValue {
+  hue: Float!
+  saturation: Float!
+  brightness: Float!
+}
+
+type LabValue {
+  lightness: Float!
+  a: Float!
+  b: Float!
+}
+
+type CmykValue {
+  cyan: Float!
+  magenta: Float!
+  yellow: Float!
+  black: Float!
+}
+
+type Logo {
+  id: ID!
+  originalUrl: String!
+  encodedUrl: String
+  encodedSize: LogoSize
+  spacing: LogoSpacing
+  title: String!
+  tags: [String!]
+}
+
+type LogoSize {
+  width: Float!
+  height: Float!
+}
+
+type LogoSpacing {
+  isEditedByUser: Boolean!
+  topPercentage: Float!
+  bottomPercentage: Float!
+  leftPercentage: Float!
+  rightPercentage: Float!
+  spacingMultiple: Float!
+}
+
+type Font {
+  id: ID!
+  element: FontElement!
+  source: FontFamilySource!
+  name: String!
+  stylesUsed: [String!]!
+  title: String!
+  tags: [String!]
+  previewImageUrl: String!
+  thumbnailImageUrl: String!
+}
+
+enum FontElement {
+  BODY
+  H1
+  H2
+  H3
+  H4
+}
+
+enum FontFamilySource {
+  GOOGLE_FONT
+  WEB_FONT_URL
+  UPLOAD
+}
+
+type GuidelineTemplate {
+  id: ID!
+  name: String!
+}
+
+union BrandItem = Color | Logo | Font
+
+extend type Query {
+  getBrandItemTitleAndTags(id: Int!, type: String!): BrandItem!
+}
+
+extend type Mutation {
+  addOrEditItemTitleAndTags(
+    id: Int!
+    type: String!
+    title: String
+    tags: [String]
+  ): Boolean
+  deleteBrandItem(id: Int!, type: String!): Boolean
+}
+
+query GetBrandItemTitleAndTags($id: Int!, $type: String!) {
+  getBrandItemTitleAndTags(id: $id, type: $type) @client {
+    title
+    tags
+  }
+}
+
+mutation AddOrEditItemTitleAndTags(
+  $id: Int!
+  $type: String!
+  $title: String
+  $tags: [String]
+) {
+  addOrEditItemTitleAndTags(id: $id, type: $type, title: $title, tags: $tags)
+    @client
+}
+
+mutation DeleteBrandItem($id: Int!, $type: String!) {
+  deleteBrandItem(id: $id, type: $type) @client
+}
